@@ -1,0 +1,24 @@
+# LaTeX build products
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.pdf
+
+# OS / editor / Python
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+
+# Heavy or derived data (kept outside the repo in ../data and ../outputs)
+*.npy
+*.npz
+*.fits
+*.h5
+*.hdf5
+*.mp4
