@@ -22,6 +22,3 @@ __pycache__/
 *.h5
 *.hdf5
 *.mp4
-
-# paper source is kept private
-*.tex
