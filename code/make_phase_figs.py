@@ -19,10 +19,13 @@ CACHE = os.path.join(ROOT, "data", "cache")
 THR = float(sys.argv[1]) if len(sys.argv) > 1 else 0.38
 T0, T1 = 6.7, 20.0                    # integration window [Myr], as in the paper's M_out definition
 V_ESC = 665.0                         # km/s at r = 1 kpc (paper text, baryons + DM halo)
+KPC_CM, MSUN_G, MH_G = 3.0856775814e21, 1.989e33, 1.6726219e-24
+DOMAIN_WIDTH_KPC = 2.80000263          # simulation box side (ds.domain_width, fixed over time)
+X_H = 0.7                              # assumed hydrogen mass fraction, for n_b = rho_gas X_H / m_H
 PHASES = ["All", "HIM", "WIM", "WNM", "CNM"]
 STYLE = {"All": dict(color="k"), "HIM": dict(color="hotpink"), "WIM": dict(color="g", mfc="none"),
          "WNM": dict(color="g"), "CNM": dict(color="cornflowerblue")}
-plt.rcParams.update({"font.family": "serif", "mathtext.fontset": "stix", "font.size": 16})
+plt.rcParams.update({"font.family": "serif", "mathtext.fontset": "stix", "font.size": 20})
 
 
 def load_series(run):
@@ -45,8 +48,27 @@ def e_sne():
     return np.trapezoid(d["ndot"][m], d["t"][m]) * 1e51          # N_SNe(T0..T1) x 1e51 erg
 
 
-def figure(cols, outfile, xlabel=None):
-    """cols: list of (label, run or None); None = placeholder column (no recomputed data)."""
+def p_sne(z_zsun):
+    r"""Momentum reference line: integral of p_t(n_b(t), Z) * Ndot_SNe(t) over T0..T1, using the per-SN
+    terminal-momentum scaling of Hopkins et al. (2018a, their eq. D23-D24, \citep{2018MNRAS.480..800H}),
+    p_t = 4.8e5 Msun km/s (E_ej/1e51 erg)^(13/14) (n_b/cm^-3)^(-1/7) f(Z)^(3/2), f(Z) = 2 for Z/Zsun < 0.01
+    else (Z/Zsun)^-0.14. n_b(t) uses the SNeRHD,f domain-mean gas density as a proxy for all runs (same
+    approximation already used for e_sne()'s SN rate), with n_b = rho_gas X_H / m_H, X_H = 0.7 assumed."""
+    d = dict(np.load(os.path.join(CACHE, "snrate_SNeRHD_f.npz")))
+    mb = dict(np.load(os.path.join(CACHE, "mbar_SNeRHD_f.npz")))
+    t, ndot = d["t"], d["ndot"]
+    mgas = np.interp(t, mb["t"], mb["mgas"])                      # Msun, onto the SN-rate time grid
+    v_cm3 = (DOMAIN_WIDTH_KPC * KPC_CM) ** 3
+    n_b = mgas * MSUN_G * X_H / (MH_G * v_cm3)                    # cm^-3
+    f_z = 2.0 if z_zsun < 0.01 else z_zsun ** -0.14
+    pt = 4.8e5 * n_b ** (-1 / 7) * f_z ** 1.5                      # Msun km/s per SN (E_ej = 1e51 erg)
+    m = (t >= T0) & (t <= T1)
+    return np.trapezoid(pt[m] * ndot[m], t[m])                    # Msun km/s
+
+
+def figure(cols, outfile, xlabel=None, z_zsun=None):
+    """cols: list of (label, run or None); None = placeholder column (no recomputed data).
+    z_zsun: if given, draws the p_SNe reference line (see p_sne()) at that metallicity."""
     fig, axs = plt.subplots(1, 4, figsize=(20, 5.2))
     titles = [r"$\overline{\langle v_{\rm out}\rangle}$", r"$M_{\rm out}$", r"$p_{\rm out}$", r"$E_{\rm out}$"]
     ylabels = [r"[km s$^{-1}$]", r"[$M_\odot$]", r"[$M_\odot$ km s$^{-1}$]", r"[erg]"]   # units on the y axes
@@ -59,17 +81,21 @@ def figure(cols, outfile, xlabel=None):
         b, _ = bulk(run)
         for ph in PHASES[::-1]:
             st = STYLE[ph]
-            axs[0].errorbar(x, b[ph]["v"], yerr=b[ph]["vsig"], fmt="o", ms=12, color=st["color"],
-                            mfc=st.get("mfc", st["color"]), label=ph if x == len(cols) - 1 else None)
+            axs[0].plot(x, b[ph]["v"], "o", ms=16, color=st["color"],
+                        mfc=st.get("mfc", st["color"]), label=ph if x == len(cols) - 1 else None)
             for ax, key in zip(axs[1:], "M p E".split()):
                 if b[ph][key] > 0:
-                    ax.plot(x, b[ph][key], "o", ms=12, color=st["color"], mfc=st.get("mfc", st["color"]))
+                    ax.plot(x, b[ph][key], "o", ms=16, color=st["color"], mfc=st.get("mfc", st["color"]))
     axs[0].axhline(V_ESC, color="lightgray", zorder=0); axs[0].text(0.03, V_ESC + 40, r"$v_{\rm esc}$", color="gray",
                                                                      transform=axs[0].get_yaxis_transform())
     axs[0].axhline(0, color="gray", ls="--", lw=1, alpha=0.6, zorder=0)
     E = e_sne()
     axs[3].axhline(E, color="lightgray", zorder=0); axs[3].text(0.05, E * 0.6, r"$E_{\rm SNe}$", color="gray",
                                                                 transform=axs[3].get_yaxis_transform())
+    if z_zsun is not None:
+        P = p_sne(z_zsun)
+        axs[2].axhline(P, color="lightgray", zorder=0); axs[2].text(0.05, P * 0.6, r"$p_{\rm SNe}$", color="gray",
+                                                                    transform=axs[2].get_yaxis_transform())
     for ax, ttl, yl in zip(axs, titles, ylabels):
         ax.set_title(ttl); ax.set_ylabel(yl, labelpad=2); ax.set_xticks(range(len(cols))); ax.set_xticklabels([c[0] for c in cols])
         ax.set_xlim(-0.6, len(cols) - 0.4)
@@ -97,8 +123,9 @@ if __name__ == "__main__":
     fn = os.path.join(ROOT, "outputs", "phase_tables", f"bulk_thr{THR:.2f}.csv")
     open(fn, "w").write("\n".join(rows) + "\n"); print("wrote", fn)
     print(f"E_SNe({T0}-{T1} Myr) = {e_sne():.3g} erg")
+    print(f"p_SNe({T0}-{T1} Myr, Z=0.01 Zsun) = {p_sne(0.01):.3g} Msun km/s")
     tt = lambda s: rf"$\mathtt{{{s}}}$"
     figure([(tt("HD"), "HD"), (tt("RHD"), "RHD"), (tt("SNe"), "SNe"), (tt("SNeRHD"), "SNeRHD,f")],
-           os.path.join(ROOT, "outputs", "figures", f"phases_runs_thr{THR:.2f}.png"))
+           os.path.join(ROOT, "outputs", "figures", f"phases_runs_thr{THR:.2f}.png"), z_zsun=0.01)
     figure([(r"$10^{-2}_{\rm fid}$", "SNeRHD,f"), (r"$10^{-1}$", None), ("1", "SNeRHD,Zsun")],
            os.path.join(ROOT, "outputs", "figures", f"phases_Z_thr{THR:.2f}.png"), xlabel=r"Z [$Z_\odot$]")
