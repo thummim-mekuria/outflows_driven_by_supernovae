@@ -174,7 +174,7 @@ $ N_\mathrm{SNe} = \dot{n}_\mathrm{SNe} M_* \Delta t$, where $\dot{n}_\mathrm{SN
 
 
 \subsection{Simulation suite}
-Table \ref{tab:tab1} summarizes the simulations analyzed in this work. The runs are differentiated based on the feedback physics and metallicity. At the fiducial metallicity ($0.01Z_\odot$), we run four physics cases--no feedback ($\mathtt{HD}$), radiation only ($\mathtt{RHD}$), supernovae only ($\mathtt{SNe}$) and both radiation and supernovae ($\mathtt{SNeRHD,f}$). We also model the full physics runs at two higher metallicities: $\mathtt{SNeRHD,0.1Z_\odot}$ and $\mathtt{SNeRHD,Z_\odot}$. The lower metallicity runs are performed at two resolutions, $N = 128$ and $N = 256$, to test convergence. 
+Table \ref{tab:tab1} summarizes the simulations analyzed in this work. The runs are differentiated based on the feedback physics and metallicity. At the fiducial metallicity ($0.01Z_\odot$), we run four physics cases--no feedback ($\mathtt{HD}$), radiation only ($\mathtt{RHDOnly}$), supernovae only ($\mathtt{SNeOnly}$) and both radiation and supernovae ($\mathtt{SNeRHD,f}$). We also model the full physics runs at two higher metallicities: $\mathtt{SNeRHD,0.1Z_\odot}$ and $\mathtt{SNeRHD,Z_\odot}$. The lower metallicity runs are performed at two resolutions, $N = 128$ and $N = 256$, to test convergence. 
 Joint analysis of this suite of simulations enables us to isolate the individual contributions of radiation and supernova feedback to the dynamics of the gas, and examine how the metal and dust content determine its thermal evolution.\\
 
 \begin{table*}
@@ -187,8 +187,8 @@ Joint analysis of this suite of simulations enables us to isolate the individual
      \hline 
      \hline
      $\mathtt{HD}$ &  -&   -&$10^{-2}$& $128^3$, $256^3$\\
-     $\mathtt{RHD}$ &  $\checkmark$&   -&$10^{-2}$& $128^3$, $256^3$\\
-     $\mathtt{SNe}$ &  -&   $\checkmark$&$10^{-2}$& $128^3$, $256^3$\\
+     $\mathtt{RHDOnly}$ &  $\checkmark$&   -&$10^{-2}$& $128^3$, $256^3$\\
+     $\mathtt{SNeOnly}$ &  -&   $\checkmark$&$10^{-2}$& $128^3$, $256^3$\\
      $\mathtt{SNeRHD,f}$&  $\checkmark$&   $\checkmark$&$10^{-2}$& $128^3$, $256^3$\\
  $\mathtt{SNeRHD,0.1Z}_\odot$& $\checkmark$& $\checkmark$&  $10^{-1}$&$128^3$\\
  $\mathtt{SNeRHD,Z}_\odot$& $\checkmark$& $\checkmark$& 1&$128^3$\\
@@ -300,7 +300,7 @@ Because so little of this energy is lost to radiation, the winds retain the full
 \begin{figure*}[ht!]
     \centering
     \includegraphics[width=\linewidth]{fig4_snapshots.png}
-    \caption{The $\mathtt{HD}$, $\mathtt{RHD}$, $\mathtt{SNe}$ and fiducial ($\mathtt{SNeRHD}$) runs at $t \sim 10$ Myr. Top row: projected gas surface density, with the mass-weighted gas velocity shown as arrows (the key in each panel gives that panel's scale) and star clusters marked as cyan stars. Bottom row: the density--temperature phase diagram, colored by the mass-weighted H$^+$ mass fraction; the horizontal dashed lines indicate the demarcation between the cold, warm, and hot phases. In the control ($\mathtt{HD}$) and radiation-only ($\mathtt{RHD}$) runs, the interstellar gas remains dense, gravitationally bound, and with primarily inward flow direction. On the other hand, the gas in the $\mathtt{SNe}$ run has been dispersed by supernovae and is moving radially outward.}
+    \caption{The $\mathtt{HD}$, $\mathtt{RHDOnly}$, $\mathtt{SNeOnly}$ and fiducial ($\mathtt{SNeRHD}$) runs at $t \sim 10$ Myr. Top row: projected gas surface density, with the mass-weighted gas velocity shown as arrows (the key in each panel gives that panel's scale) and star clusters marked as cyan stars. Bottom row: the density--temperature phase diagram, colored by the mass-weighted H$^+$ mass fraction; the horizontal dashed lines indicate the demarcation between the cold, warm, and hot phases. In the control ($\mathtt{HD}$) and radiation-only ($\mathtt{RHDOnly}$) runs, the interstellar gas remains dense, gravitationally bound, and with primarily inward flow direction. On the other hand, the gas in the $\mathtt{SNeOnly}$ run has been dispersed by supernovae and is moving radially outward.}
     \label{fig:feedback_snapshots}
 \end{figure*}
 
@@ -311,10 +311,10 @@ Figure \ref{fig:mstar_runs} shows the integrated star formation efficiency (SFE)
 \end{align}
 where $M_*$ is the stellar mass, and $M_{g,0}$ is the initial mass of the gas cloud. Independent of feedback physics, the simulation runs reach $\epsilon_* = 0.17$ within one freefall time ($t_\mathrm{ff}=2.5$ Myr), and $\epsilon_* = 0.64-0.65$ by $2t_\mathrm{ff}$.% \textcolor{red}{and there still hasnt been enough time for jets ?}.
 
-$M_*$ increase monotonically in the hydro-only run ($\mathtt{HD}$), ultimately reaching an SFE of $\gtrsim 93\%$. The $\mathtt{RHD}$ run follows a similar trend, reaching an SFE of $\epsilon_* = 0.90 $ by the simulation end at $t = 8t_\mathrm{ff}$. 
+$M_*$ increase monotonically in the hydro-only run ($\mathtt{HD}$), ultimately reaching an SFE of $\gtrsim 93\%$. The $\mathtt{RHDOnly}$ run follows a similar trend, reaching an SFE of $\epsilon_* = 0.90 $ by the simulation end at $t = 8t_\mathrm{ff}$. 
 
 
-Collapse dominates throughout the runtime of the $\mathtt{RHD}$ simulation, leading to the formation of a bound, coherently rotating disk of gas around the star clusters that is morphologically indistinguishable from the gas in the $\mathtt{HD}$ run. The inability of radiation pressure to regulate star formation in clouds with $\Sigma_\mathrm{gas} > \Sigma_\mathrm{crit}$ is consistent with analytical solutions \citep{2010ApJ...710L.142F,2019MNRAS.483.5548G} and cloud-scale RHD simulations \citep{2023MNRAS.521.5160M}.
+Collapse dominates throughout the runtime of the $\mathtt{RHDOnly}$ simulation, leading to the formation of a bound, coherently rotating disk of gas around the star clusters that is morphologically indistinguishable from the gas in the $\mathtt{HD}$ run. The inability of radiation pressure to regulate star formation in clouds with $\Sigma_\mathrm{gas} > \Sigma_\mathrm{crit}$ is consistent with analytical solutions \citep{2010ApJ...710L.142F,2019MNRAS.483.5548G} and cloud-scale RHD simulations \citep{2023MNRAS.521.5160M}.
 
 
 % \begin{align}
@@ -324,16 +324,16 @@ Collapse dominates throughout the runtime of the $\mathtt{RHD}$ simulation, lead
 % where $\langle \sfrac{\dot{p}_*}{M_*}\rangle$ is the rate of specific momentum injection by radiation \citep{2019MNRAS.483.5548G}. Neglecting gas self-gravity, the ratio of the gravitational pressure to the Eddington pressure from UV radiation is given by
 
 
-Similar to the fiducial simulation, the $\mathtt{SNe}$ run stop forming stars after $t = 6.7$ Myr and plateau at $\epsilon_* \sim 75\%$ (Figure \ref{fig:mstar_runs}).
+Similar to the fiducial simulation, the $\mathtt{SNeOnly}$ run stop forming stars after $t = 6.7$ Myr and plateau at $\epsilon_* \sim 75\%$ (Figure \ref{fig:mstar_runs}).
 
-This coincides with the detonation of the first supernovae, which shock the ISM to $T \sim 10^7\ \mathrm{K}$ and ionize it (Figure \ref{fig:feedback_snapshots}). In addition to quenching star formation, the feedback from supernovae is responsible for disrupting the ISM and driving radial outflows (Figure \ref{fig:postage_fbks}). 
+This coincides with the detonation of the first supernovae, which shock the ISM to $T \sim 10^7\ \mathrm{K}$ and ionize it (Figure \ref{fig:feedback_snapshots}). In addition to quenching star formation, the feedback from supernovae is responsible for disrupting the ISM and driving radial outflows (Figure \ref{fig:phase_diagram}). 
 
 Taken together, these results indicate that supernova feedback is the mechanism capable of halting star formation in the dense gas reservoirs of massive ($10^{11} M_\odot$) haloes in the early Universe, and so may help explain how the UV-bright galaxies that motivated this work clear their gas and dust.
 
 \begin{figure*}[ht!]
     \centering
     \includegraphics[width=\linewidth]{fig4.png}
-    \caption{Left to right: the average outflow velocity averaged between $t_\mathrm{det}$ and $t = 20$ Myr, total mass, momentum and energy carried by the outflows through a spherical surface placed at r = 1 kpc. The error bars on each data point in the velocity panel indicate the 1-$\sigma$ variation of the velocity. The $\mathtt{HD}$ and $\mathtt{RHD}$ runs do not launch an outflow, while the runs with supernova feedback have outflows. The marker colors indicate the phase of the gas, and the grey horizontal lines in the mass, momentum and energy panels show the maximum theoretical yields. 
+    \caption{Left to right: the average outflow velocity averaged between $t_\mathrm{det}$ and $t = 20$ Myr, total mass, momentum and energy carried by the outflows through a spherical surface placed at r = 1 kpc. The error bars on each data point in the velocity panel indicate the 1-$\sigma$ variation of the velocity. The $\mathtt{HD}$ and $\mathtt{RHDOnly}$ runs do not launch an outflow, while the runs with supernova feedback have outflows. The marker colors indicate the phase of the gas, and the grey horizontal lines in the mass, momentum and energy panels show the maximum theoretical yields. 
     % \textcolor{red}{separate by thermal and kinetic energy -- circle vs square, and that will enable separating out what are the radiative energy losses vs kinetic}
 }
     \label{fig:phase_diagram}
@@ -361,19 +361,19 @@ The thermal and ionization state of the gas encapsulates information on the impa
 
 Following the multiphase ISM framework of \citet{1977ApJ...218..148M}, we partition the gas into the cold ($T < 10^3\ \mathrm{K}$), hot ($T \geq 10^5\ \mathrm{K}$) and warm phases. While the hot gas is completely ionized and the cold gas is completely neutral, the warm phase is separated into the WNM ($f_\mathrm{ion} < 0.5$) and WIM ($f_\mathrm{ion} \geq 0.5$).
 
-Before examining the outflows themselves, we compare the phase structure of all the gas in the domain across the four physics cases. We do this at $t = 10$ Myr, close to the peak of the supernova rate. At this time, the gas in the $\mathtt{HD}$ run consists of dense CNM ($n > 10^5\ \mathrm{cm^{-3}}$) and WNM at $ \lesssim 10^4$ K covering a wide range of densities $n \in (10^{-1}, 10^5)\ \mathrm{cm^{-3}}$. Due to the UV radiation emitted by the stars, the ISM in the $\mathtt{RHD}$ run is moderately warmer, and significantly ($> 40\%$) ionized. Supernova feedback introduces the HIM, which has $n \in (10^1, 10^3)\ \mathrm{cm^{-3}}$ and makes up $9\%$ of the gas in the simulation at this time. The remaining $91\%$ of the gas is in the warm phases, which is primarily ($55\%$) neutral. 
+Before examining the outflows themselves, we compare the phase structure of all the gas in the domain across the four physics cases. We do this at $t = 10$ Myr, close to the peak of the supernova rate. At this time, the gas in the $\mathtt{HD}$ run consists of dense CNM ($n > 10^5\ \mathrm{cm^{-3}}$) and WNM at $ \lesssim 10^4$ K covering a wide range of densities $n \in (10^{-1}, 10^5)\ \mathrm{cm^{-3}}$. Due to the UV radiation emitted by the stars, the ISM in the $\mathtt{RHDOnly}$ run is moderately warmer, and significantly ($> 40\%$) ionized. Supernova feedback introduces the HIM, which has $n \in (10^1, 10^3)\ \mathrm{cm^{-3}}$ and makes up $9\%$ of the gas in the simulation at this time. The remaining $91\%$ of the gas is in the warm phases, which is primarily ($55\%$) neutral. 
 % On the other hand, there is no cold gas in the $\mathtt{SNeRHD}$ run, and the warm phase is primarily (\textcolor{red}{fraction} ionized).
 
-Figure \ref{fig:outflow_phases} compares the outflows across the four physics cases, showing the average velocity and the total mass, momentum and energy carried through the surface at $r = 1$ kpc by each phase of the gas. In the $\mathtt{HD}$ and $\mathtt{RHD}$ runs, the velocity of the gas is dominated by inflow over the whole course of the simulations. On the other hand, both simulations with supernovae have HIM with average velocities of $1800\ \mathrm{km\ s^{-1}}$ over this same period. The WNM and WIM have outward velocities of $240-330\ \mathrm{km\ s^{-1}}$ ($\sim 0.5 v_\mathrm{esc}$) in $\mathtt{SNe}$ and $\mathtt{SNeRHD}$ runs.
+Figure \ref{fig:phase_diagram} compares the outflows across the four physics cases, showing the average velocity and the total mass, momentum and energy carried through the surface at $r = 1$ kpc by each phase of the gas. In the $\mathtt{HD}$ and $\mathtt{RHDOnly}$ runs, the velocity of the gas is dominated by inflow over the whole course of the simulations. On the other hand, both simulations with supernovae have HIM with average velocities of $1800\ \mathrm{km\ s^{-1}}$ over this same period. The WNM and WIM have outward velocities of $240-330\ \mathrm{km\ s^{-1}}$ ($\sim 0.5 v_\mathrm{esc}$) in $\mathtt{SNeOnly}$ and $\mathtt{SNeRHD}$ runs.
 
 The total gas mass transported by the outflows over the course of the simulation is: 
 \begin{equation}
     M_\mathrm{out} = \int_{t=6.7\ \mathrm{Myr}}^{20} \dot{M}_\mathrm{out} \Delta t
 \end{equation}
- Integrating $\dot{M}_\mathrm{out}$ over this period, the total gas mass carried out by the outflows is approximately equal in the $\mathtt{SNe}$ and $\mathtt{SNeRHD}$ runs, $\sim 2.5\times 10^9\ M_\odot$. However, the partitioning of this total mass between the phases is different. The outflows in the $\mathtt{SNeOnly}$ run are made up of equal amounts of HIM and WNM ($\sim 10^9\ M_\odot$), as well as $8\times 10^8 M_\odot$ of CNM. Radiation photoionizes this gas into $5 \times 10^8 M_\odot$ of WIM in the fiducial run, which also has slightly more mass in the WNM ($1.12\times 10^9$) than  $\mathtt{SNeOnly}$. There is about the same amount of HIM ($8.3\times 10^8 M_\odot$) in both runs, which is reflective of the similar rate of supernovae between them.
+ Integrating $\dot{M}_\mathrm{out}$ over this period, the total gas mass carried out by the outflows is approximately equal in the $\mathtt{SNeOnly}$ and $\mathtt{SNeRHD}$ runs, $\sim 2.5\times 10^9\ M_\odot$. However, the partitioning of this total mass between the phases is different. The outflows in the $\mathtt{SNeOnly}$ run are made up of equal amounts of HIM and WNM ($\sim 10^9\ M_\odot$), as well as $8\times 10^8 M_\odot$ of CNM. Radiation photoionizes this gas into $5 \times 10^8 M_\odot$ of WIM in the fiducial run, which also has slightly more mass in the WNM ($1.12\times 10^9$) than  $\mathtt{SNeOnly}$. There is about the same amount of HIM ($8.3\times 10^8 M_\odot$) in both runs, which is reflective of the similar rate of supernovae between them.
 
 While the HIM carries only about $30\%$ of the total outflow mass, it dominates the momentum and energy budget of the outflows due to its extreme velocities. 
-% The hot winds in the $\mathtt{SNe}$ ($\mathtt{SNeRHD}$) run make up \textcolor{red}{$\gtrsim 60\%$ ($\gtrsim 60\%$)} of the total energy in the outflows. 
+% The hot winds in the $\mathtt{SNeOnly}$ ($\mathtt{SNeRHD}$) run make up \textcolor{red}{$\gtrsim 60\%$ ($\gtrsim 60\%$)} of the total energy in the outflows. 
 % \textcolor{red}{in the sne run, the energy is primarily kinetic? , while in the snerhd it is thermal?}.
 This demonstrates that the supernova-driven winds are unable to radiate away thermal energy before they reach the surface at $\sim 1\ \mathrm{kpc}$.
 % \textcolor{red}{why does the cnm overtake the wnm in p and e when it has smaller v and m?}
@@ -385,7 +385,7 @@ The ability of gas to cool effectively is strongly sensitive to its metallicity,
 \begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{fig7.png}
-    \caption{Escape fraction, $f_\mathrm{esc}$ of photons in the EUV (left), Lyman Werner (middle) and photoelectric (right) bands, for the runs with radiation feedback. The color of the lines indicates feedback physics, and the line style  encodes the metallicity: the fiducial metallicity is $Z = 0.01\,Z_\odot$, which is also the metallicity of the $\mathtt{RHD}$ run. $f_\mathrm{esc}$ is systematically higher in the lower energy bands and shows a strong dependence on metallicity. The presence of supernovae boosts the escape fraction.}
+    \caption{Escape fraction, $f_\mathrm{esc}$ of photons in the EUV (left), Lyman Werner (middle) and photoelectric (right) bands, for the runs with radiation feedback. The color of the lines indicates feedback physics, and the line style  encodes the metallicity: the fiducial metallicity is $Z = 0.01\,Z_\odot$, which is also the metallicity of the $\mathtt{RHDOnly}$ run. $f_\mathrm{esc}$ is systematically higher in the lower energy bands and shows a strong dependence on metallicity. The presence of supernovae boosts the escape fraction.}
     \label{fig:fesc}
 \end{figure*}
 % The rest-frame UV luminosity of a starburst galaxy, as well as its capacity to ionize the surrounding intergalactic medium, depends on 
@@ -437,7 +437,7 @@ A single UV-bright starburst of this kind would therefore ionize a sub-Mpc-to-Mp
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\linewidth]{fig8_stacked.png}
-    \caption{Visual-band extinction of the system, $A_\mathrm{V}$ (top) and rest-frame absolute UV magnitude, $M_\mathrm{UV}$ (bottom) for the same simulations shown in Figure \ref{fig:fesc}. The black lines are runs with both supernova and radiation feedback, while the red line is just RHD. The linestyles show the different metallicities of the gas}
+    \caption{Visual-band extinction of the system, $A_\mathrm{V}$ (top) and rest-frame absolute UV magnitude, $M_\mathrm{UV}$ (bottom) for the same simulations shown in Figure \ref{fig:fesc}. The black lines are runs with both supernova and radiation feedback, while the red line is just RHDOnly. The linestyles show the different metallicities of the gas}
     \label{fig:av_muv}
 \end{figure}
 
@@ -461,20 +461,13 @@ The total energy carried by the outflows also decreases with Z---while the $\mat
 The overabundance of UV-bright galaxies at Cosmic Dawn has motivated analytical models in which these systems form stars efficiently and then lose their gas and dust to feedback. Our simulations test this sequence directly: the fiducial run reaches $\epsilon_* \sim 0.76$ before supernovae clear the ISM, after which $\gtrsim 80\%$ of the UV photons escape the system. Below, we compare these results to observations, analytical models and other simulations.
 \subsection{Comparison with observations}
 
-\begin{figure}%[ht!]
-    \centering
-    \includegraphics[width=\linewidth]{fig10_ekin.png}
-    \caption{Specific kinetic energy, $\frac{1}{2}v^2 = e_\mathrm{init} - \Phi(R)$, of gas launched from $R_\mathrm{launch} = 1$ kpc as it moves out through the potential of the starburst and its dark matter halo. Black lines are trajectories labelled by their launch velocity; the grey curve is the escape trajectory ($e_\mathrm{init} = 0$), and the vertical line marks the virial radius. The colored lines show the outflow phases of the fiducial simulation, launched at the median of $\langle v_\mathrm{out}\rangle$ over $6.7-20$ Myr (dashed pink: HIM; dashed green: WIM; solid green: WNM), and the shaded regions span $\pm 1\sigma$ of the velocity over the same period. Bound gas reaches $R_\mathrm{max}$ where its curve drops to zero.}
-    \label{fig:etot}
-\end{figure}
-
 The rest-frame UV magnitude of the fiducial run follows the eras described in Section 3.1 (Figure \ref{fig:av_muv}). During gravitational collapse, $M_\mathrm{UV}$ brightens rapidly as stars form, from $\approx -16$ mag at 0.5 Myr to $\approx -22$ mag by 2 Myr. It peaks near $M_\mathrm{UV} = -26$ mag at $\sim 7$ Myr, just after the first supernovae detonate, and then fades slowly during the dispersal era as the stars age and die, to $M_\mathrm{UV} \approx -25$ mag at $t = 20$ Myr.
 % \textcolor{red}{(maybe make a figure compiling literature?)}
 
 
 The massive galaxies observed by JWST at Cosmic Dawn have typical rest-frame UV magnitudes of $\sim -20\ \mathrm{mag}$ (e.g, \citealt{2024A&A...691A..87M}), so at $t = 20$ Myr the simulated starburst is $\sim 5$ mag brighter. This extreme UV brightness is in part a consequence of the large halo mass adopted in this work. \citet{2025MNRAS.543.3802Y} model the star formation efficiency $\epsilon_*(M_\mathrm{halo},z)$ as a function of halo mass within an abundance-matching framework fit to the observed UV luminosity function, from which $M_\mathrm{UV}$ follows via the star formation rate (SFR), $\mathrm{SFR} = \epsilon_* f_b \dot{M}_\mathrm{halo}$, and a standard UV-to-SFR conversion; their Figure 3 shows that even under this model's most efficient case ($\epsilon_*=1$), a halo as massive as ours at $z\sim16$--20 hosts a galaxy with $M_\mathrm{UV}$ comparable to what we find here.
 
-Comparing the physics cases, the difference between the $\mathtt{RHD}$ and $\mathtt{SNeRHD}$ runs remains $< 0.5\ \mathrm{mag}$ even after the detonation of the first supernovae, indicating that the photoionization is sufficient to allow the escape of UV photons. Both runs become fainter at late times, consistent with the decreased UV output as the stars age and die.
+Comparing the physics cases, the difference between the $\mathtt{RHDOnly}$ and $\mathtt{SNeRHD}$ runs remains $< 0.5\ \mathrm{mag}$ even after the detonation of the first supernovae, indicating that the photoionization is sufficient to allow the escape of UV photons. Both runs become fainter at late times, consistent with the decreased UV output as the stars age and die.
 
 Metallicity has substantial effects on $M_\mathrm{UV}$, especially in the first 5 Myr. The dust-to-gas ratio of the $\mathtt{SNeRHD,0.1Z}_\odot$ and $\mathtt{SNeRHD,Z}_\odot$ runs is a factor of 10 and 100 larger than the fiducial case. This leads to increased absorption of UV photons by dust at higher Z, and the $M_\mathrm{UV}$ remains faint. During the gravitational collapse phase, the $\mathtt{SNeRHD,0.1Z}_\odot$ run is dimmer than the fiducial simulation by more than $\sim3$ mag, while the $Z = Z_\odot$ run is $\gtrsim 10$ mag dimmer. Once the supernovae clear the gas, the higher metallicity runs brighten significantly, reaching $M_\mathrm{UV} \sim -23$ by $t=20$ Myr.
 
@@ -483,7 +476,7 @@ Metallicity has substantial effects on $M_\mathrm{UV}$, especially in the first 
 The UV brightness of the simulated system depends on how much of its dust is cleared, which is the central prediction of analytical models of feedback-driven winds. We estimate the UV continuum slope $\beta_\mathrm{UV}$ (where $f_\lambda \propto \lambda^\beta$) from the simulated visual-band extinction $A_\mathrm{V}$ (Figure \ref{fig:av_muv}) in two steps. First, we convert $A_\mathrm{V}$ to the rest-frame UV attenuation at 1600\,\AA, $A_{1600}$, using the \citet{2000ApJ...533..682C} starburst attenuation curve, $A_{1600}/A_\mathrm{V} \approx 2.55$. We then convert $A_{1600}$ to $\beta_\mathrm{UV}$ using the empirical relation of \citet{1999ApJ...521...64M}, $A_{1600} \approx 4.43 + 1.99\,\beta_\mathrm{UV}$. Both relations are calibrated on local, moderately attenuated UV-selected starbursts and break down once the dust becomes optically thick, so we apply them only once feedback has cleared most of the gas ($t\gtrsim10$ Myr, $A_\mathrm{V}\lesssim0.3$ mag in the fiducial run). Over this period we find $\beta_\mathrm{UV}\approx -1.8$ to $-2.1$; the bluer end of this range falls within the blue colors ($-2.9<\beta_\mathrm{UV}<-2.0$) measured in the JWST-observed blue monsters that motivate this work, while the redder end is somewhat redder than that observed range.
 \cite{2023MNRAS.522.3986F} proposed that once high-redshift galaxies cross a sSFR threshold of $25\ \mathrm{Gyr}^{-1}$, super-Eddington winds expel the interstellar dust and gas. In our simulations, we test whether the removal of the ISM by outflows is sufficient to render the young stellar population directly visible in the UV. 
 
-The visual band extinction $A_\mathrm{V}$ in the $\mathtt{RHD}$, $\mathtt{SNeRHD,f}$, $ \mathtt{SNeRHD,0.1Z}_\odot$, and $\mathtt{SNeRHD,Z}_\odot$ runs is shown as a function of time in Figure \ref{fig:av_muv}. We first compare the $\mathtt{RHD}$ and $\mathtt{SNeRHD,f}$ runs, which differ only in the presence of supernovae and so directly test whether feedback-driven outflows clear the dust. During the first 5 Myr, the two runs have the same extinction, $A_\mathrm{V}\sim 3\ \mathrm{mag}$. Once supernovae detonate and begin clearing the gas, $A_\mathrm{V}$ in $\mathtt{SNeRHD,f}$ falls to $\sim 10^{-3}\ \mathrm{mag}$ by $t = 20$ Myr, more than an order of magnitude below the $\mathtt{RHD}$ run ($\sim 0.1\ \mathrm{mag}$), producing an essentially dust-free stellar population. This mechanical clearing is consistent with the dust-blowout picture proposed by \citet{2026A&A...705L..10M}, who show that clustered supernovae in stratified, self-gravitating clouds can mechanically vent most of the dust from young star clusters, predicting retained dust-to-stellar mass ratios in the same range inferred for spectroscopically confirmed blue monsters.
+The visual band extinction $A_\mathrm{V}$ in the $\mathtt{RHDOnly}$, $\mathtt{SNeRHD,f}$, $ \mathtt{SNeRHD,0.1Z}_\odot$, and $\mathtt{SNeRHD,Z}_\odot$ runs is shown as a function of time in Figure \ref{fig:av_muv}. We first compare the $\mathtt{RHDOnly}$ and $\mathtt{SNeRHD,f}$ runs, which differ only in the presence of supernovae and so directly test whether feedback-driven outflows clear the dust. During the first 5 Myr, the two runs have the same extinction, $A_\mathrm{V}\sim 3\ \mathrm{mag}$. Once supernovae detonate and begin clearing the gas, $A_\mathrm{V}$ in $\mathtt{SNeRHD,f}$ falls to $\sim 10^{-3}\ \mathrm{mag}$ by $t = 20$ Myr, more than an order of magnitude below the $\mathtt{RHDOnly}$ run ($\sim 0.1\ \mathrm{mag}$), producing an essentially dust-free stellar population. This mechanical clearing is consistent with the dust-blowout picture proposed by \citet{2026A&A...705L..10M}, who show that clustered supernovae in stratified, self-gravitating clouds can mechanically vent most of the dust from young star clusters, predicting retained dust-to-stellar mass ratios in the same range inferred for spectroscopically confirmed blue monsters.
 
 The metallicity of the gas sets the extinction before the supernovae: during the first 5 Myr, the $\mathtt{SNeRHD,0.1Z}_\odot$ ($\mathtt{SNeRHD,Z}_\odot$) run has 10x (100x) higher extinction than the fiducial run, owing to the increased dust abundance in the ISM. Once supernovae detonate, $A_\mathrm{V}$ drops at all metallicities, to $\lesssim 10^{-1}\ \mathrm{mag}$ in the $\mathtt{SNeRHD,0.1Z}_\odot$ run, while the $\mathtt{SNeRHD,Z}_\odot$ run retains $A_\mathrm{V} \sim 0.6\ \mathrm{mag}$ at $t = 20$ Myr.
 % This would produce an unattenuated starburst with blue UV slope $\beta_\mathrm{UV} \lesssim -2$, a scenario supported by analytical models of feedback-driven outflows (e.g., \citealt{2024A&A...684A.207F,2023MNRAS.520.2445Z}).
@@ -501,6 +494,13 @@ The higher SFE in our simulations in comparison to \cite{2025MNRAS.540.3350A} re
 
 
 \subsection{Outflow rainback time}\label{sec:rainback}
+
+\begin{figure}%[ht!]
+    \centering
+    \includegraphics[width=\linewidth]{fig10_ekin.png}
+    \caption{Specific kinetic energy, $\frac{1}{2}v^2 = e_\mathrm{init} - \Phi(R)$, of gas launched from $R_\mathrm{launch} = 1$ kpc as it moves out through the potential of the starburst and its dark matter halo. Black lines are trajectories labelled by their launch velocity; the grey curve is the escape trajectory ($e_\mathrm{init} = 0$), and the vertical line marks the virial radius. The colored lines show the outflow phases of the fiducial simulation, launched at the median of $\langle v_\mathrm{out}\rangle$ over $6.7-20$ Myr (dashed pink: HIM; dashed green: WIM; solid green: WNM), and the shaded regions span $\pm 1\sigma$ of the velocity over the same period. Bound gas reaches $R_\mathrm{max}$ where its curve drops to zero.}
+    \label{fig:etot}
+\end{figure}
 
 Our simulations end at 20 Myr, while the longer-term evolution of these systems depends on whether the expelled gas escapes or returns to fuel further star formation. Cosmological zoom-in simulations such as those above follow these longer timescales, and work on quenched galaxies at lower redshift suggests that outflows may play a role \citep{2015ARA&A..53...51S,2024ApJ...964...76G}. To connect our results to these timescales, we create a one-dimensional model for how the outflows evolve once they enter the CGM. We take $\langle v\rangle _\mathrm{out}$ averaged over t$ =6.7 - 20$ Myr as the launch velocity, and treat the outflow as a projectile moving through total gravitational potential of the system, $\Phi (r) = \Phi_\mathrm{bary}(r) + \Phi_\mathrm{DM}(r)$. This allows us to estimate the maximum distance that the gas travels to, $R_\mathrm{max}$, before being recycled back onto the system 
 
@@ -527,7 +527,7 @@ Figure \ref{fig:outflow_phases} shows that the phases of the outflow have dramat
     \label{fig:resolution}
 \end{figure}
 
-The WNM and WIM, on the other hand, remain bound, since their launch velocities, $240\ \mathrm{km\ s^{-1}}$ and $330\ \mathrm{km\ s^{-1}}$, are well below $v_\mathrm{esc}$. To calculate the maximum radius $R_\mathrm{max}$ that warm gas reaches before being raining back onto the galaxy, we compute the maximum radius from the conservation of total energy of the system, defining this point to be where the kinetic energy of the gas drops to zero: 
+The WNM and WIM, on the other hand, remain bound, since their launch velocities, $240\ \mathrm{km\ s^{-1}}$ and $330\ \mathrm{km\ s^{-1}}$, are well below $v_\mathrm{esc}$. To calculate the maximum radius $R_\mathrm{max}$ that warm gas reaches before being raining back onto the galaxy, we compute the maximum radius from the conservation of total energy of the system, defining this point to be where the kinetic energy of the gas drops to zero (Figure \ref{fig:etot}): 
 % maximum  remember that winds are energy-conserving and set $e_\mathrm{init}(r) = e_\mathrm{tot}(R_\mathrm{max})$ for all $r$. By the definition of the maximum radius,
 \begin{align}
     e_\mathrm{init} - \Phi(R_\mathrm{max}) = 0
@@ -577,7 +577,7 @@ Our main conclusion is that in the dense, metal-poor gas expected in massive hal
 
 We have presented a suite of three-dimensional radiation hydrodynamic simulations of a gas cloud embedded in a $10^{11}M_\odot$ halo at $z=10$. The clouds are initialized with a mass of $1.7 \times 10^{10} M_\odot$, a radius of $700$ pc, and metallicities of $10^{-2}Z_\odot$, $10^{-1}Z_\odot$ and $Z_\odot$. We investigate the effects of radiation and supernovae feedback and metallicity on the evolution of the system, and calculate observable signatures. Our main results are as follows.
 
-Due to the high initial gas surface density ($\Sigma_\mathrm{init} > 10^3 M_\odot \ \mathrm{pc^{-2}}$), gravitational collapse dominates the dynamics of the system for the first 6 Myr of the simulation, and star formation occurs essentially unimpeded. Within two freefall times, all the runs have formed $1.1\times 10^{10}\ M_\odot$ ($\epsilon \sim 0.64$) of stellar material (Figure \ref{fig:mstar_runs}). Star formation occurs unimpeded until the first supernovae detonate at $t = 6.3\ \mathrm{Myr}$, at which point the momentum and energy injected by feedback disperses the ISM (Figure \ref{fig:postage_fbks}). 
+Due to the high initial gas surface density ($\Sigma_\mathrm{init} > 10^3 M_\odot \ \mathrm{pc^{-2}}$), gravitational collapse dominates the dynamics of the system for the first 6 Myr of the simulation, and star formation occurs essentially unimpeded. Within two freefall times, all the runs have formed $1.1\times 10^{10}\ M_\odot$ ($\epsilon \sim 0.64$) of stellar material (Figure \ref{fig:mstar_runs}). Star formation occurs unimpeded until the first supernovae detonate at $t = 6.3\ \mathrm{Myr}$, at which point the momentum and energy injected by feedback disperses the ISM (Figure \ref{fig:mstar_evolution}). 
 
 The supernova-driven outflows have mass flux $3\times 10^8 M_\odot\ \mathrm{Myr^{-1}}$, with an average velocity of $1000\ \mathrm{km\ s^{-1}}$. At the fiducial metallicity ($10^{-2} Z_\odot$), the winds are energy conserving for the first 10 Myr of detonations, since the gas exits the system faster than it can cool radiatively (Figure \ref{fig:outflow_phases}).
 
