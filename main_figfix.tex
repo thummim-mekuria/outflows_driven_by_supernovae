@@ -21,19 +21,24 @@
 University of California, Santa Cruz CA,95064, USA}
 
 \author{Shyam Menon}
-\affiliation{Department of Physics and Astronomy, Rutgers, The State University of New Jersey, 136 Frelinghuysen Road, Piscataway, NJ 08854, USA}
-\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, NY 10010, USA}
+\affiliation{Department of Physics and Astronomy, Rutgers, The State University of New Jersey,\\
+136 Frelinghuysen Road, Piscataway, NJ 08854, USA}
+\affiliation{Center for Computational Astrophysics, Flatiron Institute, \\
+162 5th Avenue, New York, NY 10010, USA}
 \author{Michael Y. Grudi\'{c}}
-\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, NY 10010, USA}
+\affiliation{Center for Computational Astrophysics, Flatiron Institute, \\
+162 5th Avenue, New York, NY 10010, USA}
 \author{Nia Imara}
 \affiliation{Department of Astronomy and Astrophysics \\
 University of California, Santa Cruz CA,95064, USA}
 
 \author{Piyush Sharda}
-\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, NY 10010, USA}
+\affiliation{Center for Computational Astrophysics, Flatiron Institute, \\
+162 5th Avenue, New York, NY 10010, USA}
 
 \author{Rachel Somerville} 
-\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, NY 10010, USA}
+\affiliation{Center for Computational Astrophysics, Flatiron Institute, \\
+162 5th Avenue, New York, NY 10010, USA}
 
 \title{Outflows from a starburst galaxy at Cosmic Dawn}
 \begin{abstract}
@@ -45,7 +50,7 @@ The spectroscopic confirmation and characterization of galaxies out to redshifts
 % This discrepancy persists even after recalibration across independent modelling frameworks, both semi-analytic and hydrodynamic, which continue to under-predict the abundance of UV-bright galaxies at $z\gtrsim10$ \citep{2025A&A...696A.157M,LagosShark2026}.
 % % there is an overabundance of massive ($M \geq 10^9 M_\odot$), UV-bright ($M_{\mathrm UV} \lesssim -22.5\ \mathrm{mag}$), and blue ($-2.0 < \beta_\mathrm{UV} < -2.9$) galaxies at $z =8–10$ 
 
-The appearance of such UV-bright galaxies by 500 Myr after the Big Bang does not by itself imply that they are massive, since stellar and halo masses remain difficult to pin down. Their brightness could instead arise from efficient mass assembly (a high star formation efficiency), a dust-free environment, which yields more observed light for a given stellar mass, or a top-heavy IMF or AGN contribution, which produce more UV light for a given stellar mass. Their colors further suggest unobscured young stellar systems. Highly efficient star formation, a top-heavy IMF, and a dust-free environment have been proposed as likely explanations for the abundance of these systems \citep{2022ApJ...938L..10I,2023MNRAS.522.3986F,2023MNRAS.523.3201D,2023ApJ...955L..35S,2024A&A...684A.207F,2023MNRAS.520.2445Z,Somerville2025SFE}. \cite{2023MNRAS.523.3201D} argue that the enhanced density $n>3\times10^3\ \mathrm{cm^{-3}}$ and low metallicity $Z<0.1 Z_\odot$ of the early universe lead to gas free-fall times of $t \sim 1$ Myr, which are much shorter than the time for feedback processes---such as jets, winds and supernovae--- to turn on. This leads to a star formation efficiency of $\epsilon \sim 1$, such that a $10^{11}\ M_\odot$ halo at $z=10$ would host a galaxy with $M_*\sim 10^{10}\ M_\odot$.
+In order to interpret the appearance of such UV-bright galaxies by 500 Myr after the Big Bang, a model is needed to link stellar and halo masses to each other as well as to a specific luminosity output. Highly efficient star formation, a top-heavy IMF, and a dust-free environment have been proposed as likely explanations for the abundance of these systems \citep{2022ApJ...938L..10I,2023MNRAS.522.3986F,2023MNRAS.523.3201D,2023ApJ...955L..35S,2024A&A...684A.207F,2023MNRAS.520.2445Z,Somerville2025SFE}. \cite{2023MNRAS.523.3201D} argue that the enhanced density $n>3\times10^3\ \mathrm{cm^{-3}}$ and low metallicity $Z<0.1 Z_\odot$ of the early universe lead to gas free-fall times of $t \sim 1$ Myr, which are much shorter than the time for feedback processes---such as jets, winds and supernovae--- to turn on. This leads to a star formation efficiency of $\epsilon \sim 1$, such that a $10^{11}\ M_\odot$ halo at $z=10$ would host a galaxy with $M_*\sim 10^{10}\ M_\odot$.
 % sfr of 65 msun/yr, stellar mass of 1e11 msun
 
 \citet{2023MNRAS.522.3986F} propose that once high-$z$ galaxies cross a critical specific star formation rate threshold of $25 \ \mathrm{Gyr}^{-1}$, feedback-driven winds expel the interstellar gas and dust from these galaxies, significantly reducing the attenuation and reddening of UV photons from the young stellar population \citep{2023MNRAS.520.2445Z,2024A&A...684A.207F}. The extremely blue slopes and near-unity Lyman continuum escape fractions measured in individual systems lend observational support to this scenario \citep{2026arXiv260202322M, 2025OJAp....8E.125F, 2024ApJ...976..160H, 2025A&A...698A.234D,2023ApJ...955L..35S}. 
@@ -365,9 +370,9 @@ The total gas mass transported by the outflows over the course of the simulation
 \begin{equation}
     M_\mathrm{out} = \int_{t=6.7\ \mathrm{Myr}}^{20} \dot{M}_\mathrm{out} \Delta t
 \end{equation}
- Integrating $\dot{M}_\mathrm{out}$ over this period, $M_\mathrm{out}$ is approximately equal for the $\mathtt{SNe}$ and $\mathtt{SNeRHD}$ runs, at $\sim 2.5\times 10^9\ M_\odot$. However, the partitioning of this total mass between the phases is different. There is no WIM without radiation, and the $\mathtt{SNe}$ outflows are made up of equal amounts of HIM and WNM ($\sim 10^9\ M_\odot$), with appreciable CNM ($8\times 10^8 M_\odot$). By contrast, in $\mathtt{SNeRHD}$, there is more mass in the WNM ($1.12\times 10^9$), negligible amounts of CNM, and the WIM ($5 \times 10^8 M_\odot$) in $\mathtt{SNeRHD,f}$ now makes up about $30\%$ of the total gas in the warm phase, consistent with our interpretation in Section \ref{sec:bulk} that the winds are energy-driven \textcolor{magenta}{does the WIM fraction really support the energy-driven interpretation?}. There is about the same amount of HIM ($8.3\times 10^8 M_\odot$) as in $\mathtt{SNe}$, which is reflective of the similar rate of supernovae between the two runs.
+ Integrating $\dot{M}_\mathrm{out}$ over this period, the total gas mass carried out by the outflows is approximately equal in the $\mathtt{SNe}$ and $\mathtt{SNeRHD}$ runs, $\sim 2.5\times 10^9\ M_\odot$. However, the partitioning of this total mass between the phases is different. The outflows in the $\mathtt{SNeOnly}$ run are made up of equal amounts of HIM and WNM ($\sim 10^9\ M_\odot$), as well as $8\times 10^8 M_\odot$ of CNM. Radiation photoionizes this gas into $5 \times 10^8 M_\odot$ of WIM in the fiducial run, which also has slightly more mass in the WNM ($1.12\times 10^9$) than  $\mathtt{SNeOnly}$. There is about the same amount of HIM ($8.3\times 10^8 M_\odot$) in both runs, which is reflective of the similar rate of supernovae between them.
 
-While the HIM carries only about $30\%$ of the total outflow mass in both runs $\mathtt{SNe}$ and $\mathtt{SNeRHD}$, it dominates the momentum and energy budget of the outflows due to its extreme velocities. 
+While the HIM carries only about $30\%$ of the total outflow mass, it dominates the momentum and energy budget of the outflows due to its extreme velocities. 
 % The hot winds in the $\mathtt{SNe}$ ($\mathtt{SNeRHD}$) run make up \textcolor{red}{$\gtrsim 60\%$ ($\gtrsim 60\%$)} of the total energy in the outflows. 
 % \textcolor{red}{in the sne run, the energy is primarily kinetic? , while in the snerhd it is thermal?}.
 This demonstrates that the supernova-driven winds are unable to radiate away thermal energy before they reach the surface at $\sim 1\ \mathrm{kpc}$.
